@@ -1,4 +1,4 @@
-export interface IpostPokemon {
+export interface IPostPokemon {
     name: string,
     price: number,
     warehouse: string,

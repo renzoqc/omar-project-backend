@@ -1,8 +1,12 @@
-import { Entity, BaseEntity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
-
+import { Entity, 
+    BaseEntity, 
+    Column, 
+    PrimaryGeneratedColumn, 
+    CreateDateColumn, 
+    UpdateDateColumn, 
+    DeleteDateColumn } from "typeorm";
 @Entity('pokemon')
 export class Pokemon extends BaseEntity{
-
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number
 
@@ -30,5 +34,4 @@ export class Pokemon extends BaseEntity{
 
     @DeleteDateColumn()
     deleteAt: Date;
-
 }
