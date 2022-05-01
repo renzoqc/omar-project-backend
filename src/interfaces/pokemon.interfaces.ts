@@ -7,3 +7,9 @@ export interface IPostPokemon {
     updatedAt: Date,
     deleteAt: Date
 }
+
+export interface IResponsePokemon {
+    message: string,
+    content: any,
+    extra: string
+}
