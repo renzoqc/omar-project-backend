@@ -3,7 +3,7 @@ import {createPokemonController, deletePokemonController, getPokemonController, 
 
 const router = Router();
 
-router.get("/pokemons",getPokemonsController);
+router.get("/pokemons", getPokemonsController);
 router.post("/pokemons", createPokemonController);
 router.delete("/pokemons/:id", deletePokemonController);
 router.get("/pokemons/:id", getPokemonController);
