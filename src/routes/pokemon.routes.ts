@@ -1,12 +1,13 @@
 import { Router } from "express";
-import {createPokemonController, deletePokemonController, getPokemonController, getPokemonsController, updatePokemonController } from "../controllers/pokemon.controller";
+import { PokemonController } from '../controllers/pokemon.controller'
 
+const Controller = new PokemonController()
 const router = Router();
 
-router.get("/pokemons", getPokemonsController);
-router.post("/pokemons", createPokemonController);
-router.delete("/pokemons/:id", deletePokemonController);
-router.get("/pokemons/:id", getPokemonController);
-router.put("/pokemons/:id", updatePokemonController);
+router.get("/pokemons", Controller.getPokemons);
+router.post("/pokemons", Controller.createPokemon);
+router.delete("/pokemons/:id", Controller.deletePokemon);
+router.get("/pokemons/:id", Controller.getPokemon);
+router.put("/pokemons/:id", Controller.updatePokemon);
 
 export default router;
