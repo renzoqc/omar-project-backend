@@ -13,3 +13,5 @@ export interface IResponsePokemon {
     content: any,
     extra: string
 }
+
+// crear varias interfaces

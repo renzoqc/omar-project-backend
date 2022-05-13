@@ -7,45 +7,46 @@ import { getRepository } from "typeorm";
 export class PokemonService {
     constructor() {
     }
-    async getPokemons() {
+
+    async getPokemons():Promise<any> {
         try {
-            const PokemonRepository = AppDataSource.getRepository(Pokemon)
-            const getPokemonsS = await PokemonRepository.find()
+            const PokemonRepository:any = AppDataSource.getRepository(Pokemon)
+            const getPokemonsS:any = await PokemonRepository.find()
             return getPokemonsS;
         } catch (error) {
             throw error
         }
     };
-    
-    async createPokemon (data:IPostPokemon[]) {
+
+    async createPokemon (data:IPostPokemon[]):Promise<any> {
         try {
-            const PokemonRepository = AppDataSource.getRepository(Pokemon)
-            const createdPokemonS = await PokemonRepository.save(data);
+            const PokemonRepository:any = AppDataSource.getRepository(Pokemon)
+            const createdPokemonS:any = await PokemonRepository.save(data);
             return createdPokemonS
         } catch (error) {
             throw error
         }
     };
 
-    async deletePokemon (id: string)  {
+    async deletePokemon (id: string):Promise<any>  {
         try {
             const PokemonRepository = AppDataSource.getRepository(Pokemon)
             const eliminedPokemonS = await PokemonRepository.delete({ id: parseInt(id)})
-           
-            if (eliminedPokemonS) {
-                return id
+
+            if(eliminedPokemonS.affected === 0){
+                return false
             }
-            return "Pokemon no encontrado"
+            return true
         } catch (error) {
             throw error
         }
      };
 
-    async getPokemon (id: string ) {
+    async getPokemon (id: string ):Promise<any> {
         try {
-            const PokemonRepository = AppDataSource.getRepository(Pokemon)
-            const getPokemonS = await PokemonRepository.findOneBy({id: parseInt(id)})
-            
+            const PokemonRepository:any = AppDataSource.getRepository(Pokemon)
+            const getPokemonS:any = await PokemonRepository.findOneBy({id: parseInt(id)})
+
             if(getPokemonS){
                 return getPokemonS
             }
@@ -55,18 +56,19 @@ export class PokemonService {
         }
     };
 
-    async updatePokemon (id:string, data:IPostPokemon) {
+    async updatePokemon (id:string, data:IPostPokemon):Promise<any> {
         try {
             const PokemonRepository = AppDataSource.getRepository(Pokemon)
-            const pokemon = await PokemonRepository.findOneBy({ id: parseInt(id)});
-            
-            if(pokemon){
+            const pokemon = await PokemonRepository.findOneBy({id: parseInt(id)});
+            // console.log(pokemon)
+            if (pokemon) {
                 PokemonRepository.merge(pokemon, data);
                 const results = await PokemonRepository.save(pokemon);
                 return results
             }
-            return {msg:"Pokemon no encontrado"}
-        } catch (error) {
+            return null
+        }
+         catch (error) {
             throw error;
         }
     };
