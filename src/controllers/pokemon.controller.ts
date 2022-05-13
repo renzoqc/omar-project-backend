@@ -60,35 +60,3 @@ export class PokemonController {
 
 }
 
-
-// export const getPokemonController = async (req: Request, res: Response):Promise<any> => {
-//   try {
-//     const getPokemonC = await getPokemonService(req.params.id)
-//     const response = ApiResponse("Se encontro un pokemon", getPokemonC, "")
-//     return res.json(response)
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// }
-//
-
-//
-// export const deletePokemonController = async (req: Request, res: Response):Promise<any> =>{
-//   try {
-//     const idDeletedPokemonC = await deletePokemonService(req.params.id);
-//     const response = ApiResponse(`Se elimino pokemon con id: ${idDeletedPokemonC}`, {} , "")
-//     return res.json(response)
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// }
-//
-// export const updatePokemonController = async (req: Request, res: Response):Promise<any> =>{
-//   try {
-//     const updatePokemonC = await updatePokemonService(req.params.id, req.body)
-//     const response = ApiResponse("Se actualizo el pokemon ", updatePokemonC, "")
-//     return res.json(response)
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// }
