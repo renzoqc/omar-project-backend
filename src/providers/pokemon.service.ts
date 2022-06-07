@@ -1,6 +1,6 @@
 import {Pokemon} from "../entity/Pokemon";
 import {request, Request, response, Response} from "express";
-import { IPostPokemon } from "../interfaces/pokemon.interfaces"
+import { IPostPokemon, IGetErrorMessage} from "../interfaces/pokemon.interfaces"
 import { AppDataSource } from '../db'
 import { getRepository } from "typeorm";
 
@@ -8,9 +8,9 @@ export class PokemonService {
     constructor() {
     }
 
-    async getPokemons():Promise<any> {
+    async getPokemons():Promise<Pokemon[]> {
         try {
-            const PokemonRepository:any = AppDataSource.getRepository(Pokemon)
+            const PokemonRepository = AppDataSource.getRepository(Pokemon)
             const getPokemonsS:any = await PokemonRepository.find()
             return getPokemonsS;
         } catch (error) {
@@ -18,17 +18,18 @@ export class PokemonService {
         }
     };
 
-    async createPokemon (data:IPostPokemon[]):Promise<any> {
+    async createPokemon (data:IPostPokemon[]):Promise<Pokemon> {
         try {
-            const PokemonRepository:any = AppDataSource.getRepository(Pokemon)
+            const PokemonRepository = AppDataSource.getRepository(Pokemon)
             const createdPokemonS:any = await PokemonRepository.save(data);
+            console.log(createdPokemonS)
             return createdPokemonS
         } catch (error) {
             throw error
         }
     };
 
-    async deletePokemon (id: string):Promise<any>  {
+    async deletePokemon (id: string):Promise<true | false>  {
         try {
             const PokemonRepository = AppDataSource.getRepository(Pokemon)
             const eliminedPokemonS = await PokemonRepository.delete({ id: parseInt(id)})
@@ -42,7 +43,7 @@ export class PokemonService {
         }
      };
 
-    async getPokemon (id: string ):Promise<any> {
+    async getPokemon (id: string ):Promise<Pokemon | IGetErrorMessage> {
         try {
             const PokemonRepository:any = AppDataSource.getRepository(Pokemon)
             const getPokemonS:any = await PokemonRepository.findOneBy({id: parseInt(id)})
@@ -56,11 +57,11 @@ export class PokemonService {
         }
     };
 
-    async updatePokemon (id:string, data:IPostPokemon):Promise<any> {
+    async updatePokemon (id:string, data:IPostPokemon):Promise<Pokemon | null>{
         try {
             const PokemonRepository = AppDataSource.getRepository(Pokemon)
             const pokemon = await PokemonRepository.findOneBy({id: parseInt(id)});
-            // console.log(pokemon)
+            
             if (pokemon) {
                 PokemonRepository.merge(pokemon, data);
                 const results = await PokemonRepository.save(pokemon);

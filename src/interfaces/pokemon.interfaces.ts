@@ -14,4 +14,20 @@ export interface IResponsePokemon {
     extra: string
 }
 
+export interface IServiceUpdate {
+    id: string,
+    name: string,
+    price: number,
+    warehouse: string,
+    author: string,
+    createdAt: Date,
+    updatedAt: Date,
+    deleteAt: Date
+}
+
+export interface IGetErrorMessage {
+    msg:string
+}
+
+
 // crear varias interfaces
