@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ApiResponse } from '../response/pokemon.responses'
 import { PokemonService } from '../providers/pokemon.service'
+import {Pokemon} from "../entity/Pokemon";
 
 const Service = new PokemonService()
 
@@ -10,7 +11,7 @@ export class PokemonController {
 
   async getPokemons (req: Request, res: Response):Promise<any> {
     try{
-      const getPokemonsC:any = await Service.getPokemons();
+      const getPokemonsC = await Service.getPokemons();
       let response:any;
 
       if(getPokemonsC.length === 0) {

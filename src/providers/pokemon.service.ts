@@ -1,8 +1,7 @@
 import {Pokemon} from "../entity/Pokemon";
-import {request, Request, response, Response} from "express";
-import { IPostPokemon, IGetErrorMessage} from "../interfaces/pokemon.interfaces"
-import { AppDataSource } from '../db'
-import { getRepository } from "typeorm";
+import {IGetErrorMessage, IPostPokemon} from "../interfaces/pokemon.interfaces"
+import {AppDataSource} from '../db'
+import {PokemonDto} from '../dto/Pokemon.dto'
 
 export class PokemonService {
     constructor() {
@@ -11,19 +10,16 @@ export class PokemonService {
     async getPokemons():Promise<Pokemon[]> {
         try {
             const PokemonRepository = AppDataSource.getRepository(Pokemon)
-            const getPokemonsS:any = await PokemonRepository.find()
-            return getPokemonsS;
+            return await PokemonRepository.find();
         } catch (error) {
             throw error
         }
     };
 
-    async createPokemon (data:IPostPokemon[]):Promise<Pokemon> {
+    async createPokemon (data: PokemonDto[]):Promise<Pokemon[]> {
         try {
             const PokemonRepository = AppDataSource.getRepository(Pokemon)
-            const createdPokemonS:any = await PokemonRepository.save(data);
-            console.log(createdPokemonS)
-            return createdPokemonS
+            return await PokemonRepository.save(data)
         } catch (error) {
             throw error
         }
@@ -45,8 +41,8 @@ export class PokemonService {
 
     async getPokemon (id: string ):Promise<Pokemon | IGetErrorMessage> {
         try {
-            const PokemonRepository:any = AppDataSource.getRepository(Pokemon)
-            const getPokemonS:any = await PokemonRepository.findOneBy({id: parseInt(id)})
+            const PokemonRepository = AppDataSource.getRepository(Pokemon)
+            const getPokemonS:Pokemon | null = await PokemonRepository.findOneBy({id: parseInt(id)})
 
             if(getPokemonS){
                 return getPokemonS
@@ -57,7 +53,7 @@ export class PokemonService {
         }
     };
 
-    async updatePokemon (id:string, data:IPostPokemon):Promise<Pokemon | null>{
+    async updatePokemon (id:string, data:PokemonDto):Promise<Pokemon | null>{
         try {
             const PokemonRepository = AppDataSource.getRepository(Pokemon)
             const pokemon = await PokemonRepository.findOneBy({id: parseInt(id)});
