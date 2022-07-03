@@ -19,17 +19,6 @@ export interface IResponsePokemonNull {
     extra: string
 }
 
-export interface IServiceUpdate {
-    id: string,
-    name: string,
-    price: number,
-    warehouse: string,
-    author: string,
-    createdAt: Date,
-    updatedAt: Date,
-    deleteAt: Date
-}
-
 export interface IGetErrorMessage {
     msg:string
 }
@@ -44,8 +33,21 @@ export interface IServiceDelete{
     affected: number
 }
 
-export interface IGetErrorMessage2 {
-    message:string
+export interface GetPokemonsInterface {
+    message: string,
+    content: Pokemon[],
+    extra: string
 }
-
-// crear varias interfaces
+  
+export interface ObjectPokemonInterface {
+    message: string,
+    content: Pokemon,
+    extra: string
+}
+  
+export interface DeletePokemonInterface{
+    message: string,
+    content: null,
+    extra: string
+}
+  

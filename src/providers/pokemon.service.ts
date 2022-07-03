@@ -1,5 +1,5 @@
 import {Pokemon} from "../entity/Pokemon";
-import {IGetErrorMessage, IPostPokemon} from "../interfaces/pokemon.interfaces"
+import {IGetErrorMessage} from "../interfaces/pokemon.interfaces"
 import {AppDataSource} from '../db'
 import {PokemonDto} from '../dto/Pokemon.dto'
 
