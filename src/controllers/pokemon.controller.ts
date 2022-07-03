@@ -8,6 +8,7 @@ import type * as E from 'express';
 
 const Service = new PokemonService()
 
+
 export class PokemonController {
   constructor() {
   }
