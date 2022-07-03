@@ -1,9 +1,9 @@
-import { Entity,
-    BaseEntity,
-    Column,
-    PrimaryGeneratedColumn,
-    CreateDateColumn,
-    UpdateDateColumn,
+import { Entity, 
+    BaseEntity, 
+    Column, 
+    PrimaryGeneratedColumn, 
+    CreateDateColumn, 
+    UpdateDateColumn, 
     DeleteDateColumn } from "typeorm";
 @Entity('pokemon')
 export class Pokemon extends BaseEntity{
@@ -11,7 +11,6 @@ export class Pokemon extends BaseEntity{
     id: number
 
     @Column({
-        type: "varchar",
         unique: true
     })
     name: string;
@@ -21,28 +20,18 @@ export class Pokemon extends BaseEntity{
     })
     price: number
 
-    @Column({
-        type: "varchar",
-    })
+    @Column()
     warehouse: string;
 
-    @Column({
-        type: "varchar",
-    })
+    @Column()
     author: string;
 
-    @CreateDateColumn({
-        type: "date"
-    })
+    @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn({
-        type: "date"
-    })
+    @UpdateDateColumn()
     updatedAt: Date;
 
-    @DeleteDateColumn({
-        type: "date"
-    })
+    @DeleteDateColumn()
     deleteAt: Date;
 }
